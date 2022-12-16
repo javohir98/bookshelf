@@ -10,6 +10,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import axios from '../service/axios'
 
 const theme = createTheme();
 
@@ -17,12 +18,16 @@ export default function SignUp() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-        name: data.get('name'),
-        email: data.get('email'),
-        key: data.get('key'),
-        secret: data.get('secret')
-    });
+    const body = {
+      name: data.get('name'),
+      email: data.get('email'),
+      key: data.get('key'),
+      secret: data.get('secret')
+    };
+
+    axios.post('/signup', body)
+      .then((res) => console.log(res.data))
+      .catch(err => console.log(err))
     
   };
 
