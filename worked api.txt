@@ -1,0 +1,7 @@
+Sign up
+Myself
+title
+books
+edit
+delete
+create
