@@ -1,29 +1,23 @@
 import { Card, CardContent, CardMedia, Typography } from "@mui/material"
+import { IBook } from "../types/type"
+import bookAvatar from '../assets/book_av.jpg'
 
-// interface BookItemProps {
-//     author: string,
-//     cover: string,
-//     isbn: string,
-//     published: number,
-//     title: string
-// }
-
-const BookItem = () => {
+const BookItem = (props: IBook) => {
+  const { author, cover, id, isbn, pages, published, title} = props
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
         component="img"
         height="140"
-        image=''
+        image={`${cover || bookAvatar}`}
         alt="green iguana"
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          Lizard
+          {author}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
+          {title}
         </Typography>
       </CardContent>
     </Card>

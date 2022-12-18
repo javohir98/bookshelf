@@ -1,6 +1,20 @@
+import { Grid } from '@mui/material'
+import { Box, Container } from '@mui/system'
+import { useEffect } from 'react'
 import {Md5} from 'ts-md5'
+import BookItem from '../components/BookItem'
+import BookList from '../components/BookList'
 import { useGetBooksQuery } from '../service/apiSlice'
-import { IBook } from '../types/type'
+import { ISelectBooks } from '../types/type'
+
+const style = {
+  flexGrow: 1,
+  marginTop: '24px'
+}
+
+const styleCnt = {
+  marginTop: '50px'
+}
 
 const Books = () => {
     let Key = 'mustang'
@@ -14,8 +28,31 @@ const Books = () => {
       error
   } = useGetBooksQuery({Key, Sign})
 
+  useEffect(() => {
+    console.log(books?.data);
+    
+  }, [books])
+
   return (
-    <div>{books?.data.map((item: IBook) => <h1 key={item.book.id}>{item.book.author}<img src={item.book.cover} /></h1>)}</div>
+    <Container sx={styleCnt}>
+      <Box sx={style}>
+        <Grid container spacing={2}>
+          {books?.data.map((item: ISelectBooks) => (
+            <Grid item xs={3} key={item.book.id}>
+                <BookItem 
+                  author={item.book.author} 
+                  cover={item.book.cover}
+                  id={item.book.id}
+                  isbn={item.book.isbn}
+                  pages={item.book.pages}
+                  published={item.book.published}
+                  title={item.book.title}
+                />
+            </Grid>
+          ))}
+        </Grid>
+      </Box>
+    </Container>
   )
 }
 

@@ -6,6 +6,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 import { ApiProvider } from '@reduxjs/toolkit/query/react'
 import { apiSlice } from './service/apiSlice';
+// import { AppProvider } from './context/AppContext';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -13,9 +14,11 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <ApiProvider api={apiSlice}>
-      <Router>
-        <App />
-      </Router>
+      {/* <AppProvider> */}
+        <Router>
+          <App />
+        </Router>
+      {/* </AppProvider> */}
     </ApiProvider>
   </React.StrictMode>
 );

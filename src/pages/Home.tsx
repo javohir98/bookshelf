@@ -7,10 +7,11 @@ const style = {
 }
 
 const Home = () => {
+  
   return (
     <Container sx={style}>
         <SearchBar />
-        <BookList />
+        {/* <BookList /> */}
     </Container>
   )
 }

@@ -2,7 +2,7 @@ import BookItem from "./BookItem"
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import { useSelector } from "react-redux";
-import { IBook } from "../types/type";
+import { IBook, ISelectBooks } from "../types/type";
 import { useEffect } from "react";
 
 const style = {
@@ -10,7 +10,7 @@ const style = {
     marginTop: '24px'
 }
 
-const BookList = () => {
+const BookList = (list: ISelectBooks[]) => {
     const books = useSelector((state: any) => state.payload)
 
     useEffect(() => {
@@ -19,13 +19,13 @@ const BookList = () => {
     }, [books])
   return (
     <Box sx={style}>
-        {/* <Grid container spacing={2}>
-            {books && books.map((item: IBook) => (
+        <Grid container spacing={2}>
+            {list.map((item: ISelectBooks) => (
                 <Grid item xs={3}>
-                    <BookItem/>
+                    {/* <BookItem/> */}
                 </Grid>
             ))}
-        </Grid> */}
+        </Grid>
     </Box>
   )
 }
