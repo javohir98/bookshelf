@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { IBook } from '../types/type'
 
 export const apiSlice = createApi({
     reducerPath: 'api',
@@ -25,7 +26,8 @@ export const apiSlice = createApi({
                     Sign
                 }
             }),
-            invalidatesTags: ['Books']
+            transformResponse: (response: {data: IBook}, meta, args) => response.data,
+            invalidatesTags: ['Books'],
         }),
         addBook: builder.mutation({
             query: ({Key, Sign, book}) => ({

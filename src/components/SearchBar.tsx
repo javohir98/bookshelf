@@ -8,17 +8,15 @@ const SearchBar = () => {
     const [value, setValue] = useState('')
     let Key = localStorage.getItem('S_key')
     let Sign = Md5.hashStr(`GEThttps://no23.lavina.tech/books/:${value}${Key}`)
-    const [getSearch, result] = useSearchByTitleMutation()
+    const [getSearch, result] = useSearchByTitleMutation({
+      fixedCacheKey: 'shared-update-post',
+    })
 
     const handleData = (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault()
 
       getSearch({Key, Sign, title: value})
     }
-
-    useEffect(() => {
-      // console.log(result);
-    }, [result])
     
     return (
         <Box component={'form'} onSubmit={handleData}>
