@@ -14,8 +14,8 @@ const BookItem = (props: IBook) => {
     "isbn": `${isbn}`
   })
 
-  let SignDel = Md5.hashStr(`DELETEhttps://no23.lavina.tech/books/:${JSON.stringify(id)}${Key}`)
-  let SignEdit = Md5.hashStr(`PATCHhttps://no23.lavina.tech/books/:${id}${Key}`)
+  let SignDel = Md5.hashStr(`DELETEhttps://no23.lavina.tech/books/${JSON.stringify(id)}${Key}`)
+  let SignEdit = Md5.hashStr(`PATCHhttps://no23.lavina.tech/books/${id}${Key}`)
   let SignAdd = Md5.hashStr(`POSThttps://no23.lavina.tech/books${body}${Key}`)
 
   const [addBook, { isLoading, isError, isSuccess, error }] = useAddBookMutation()
@@ -25,6 +25,10 @@ const BookItem = (props: IBook) => {
   useEffect(() => {
     if(isSuccess) {
       toast.success('Book added successfully !');
+    } else if(deleteRes.isSuccess) {
+      toast.success('Item Removed !');
+    } else if(editRes.isSuccess) {
+      toast.success('Item Updated !');
     } else if(isError || deleteRes.isError || editRes.isError) {
       toast.error('Error occurred !');
     }

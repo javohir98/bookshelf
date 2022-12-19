@@ -43,7 +43,7 @@ export const apiSlice = createApi({
         }),
         updateBook: builder.mutation({
             query: ({Key, Sign, id}) => ({
-                url: `/books/:${id}`,
+                url: `/books/${id}`,
                 method: 'PATCH',
                 headers: {
                     Key,
@@ -54,7 +54,7 @@ export const apiSlice = createApi({
         }),
         deleteBook: builder.mutation({
             query: ({Key, Sign, id}) => ({
-                url: `/books/:${id}`,
+                url: `/books/${id}`,
                 method: 'DELETE',
                 headers: {
                     Key,
