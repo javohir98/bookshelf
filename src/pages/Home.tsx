@@ -1,6 +1,7 @@
 import { Box, Grid } from '@mui/material';
 import Container from '@mui/material/Container';
 import BookItem from '../components/BookItem';
+import Loader from '../components/Loader';
 import SearchBar from '../components/SearchBar';
 import { useSearchByTitleMutation } from '../service/apiSlice';
 import { IBook } from '../types/type';
@@ -21,7 +22,7 @@ const Home = () => {
 
   let content;
   if(isLoading) {
-    content = <p>Loading...</p>
+    content = <Loader />
   } else if(isSuccess && data instanceof Array) {
     content = data && data.map((book: IBook) => (
       <Grid item xs={6} md={3} sm={4}  key={book.isbn}>

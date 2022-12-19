@@ -10,6 +10,7 @@ import { Link as RouterLink } from 'react-router-dom';
 
 const Navbar = () => {
   const navigate = useNavigate()
+  
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">

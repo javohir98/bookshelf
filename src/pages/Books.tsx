@@ -1,6 +1,5 @@
 import { Grid } from '@mui/material'
 import { Box, Container } from '@mui/system'
-import { useEffect } from 'react'
 import {Md5} from 'ts-md5'
 import BookItem from '../components/BookItem'
 import Loader from '../components/Loader'
@@ -27,11 +26,6 @@ const Books = () => {
       isError,
       error
   } = useGetBooksQuery({Key, Sign})
-
-  useEffect(() => {
-    console.log(isSuccess);
-    
-  }, [books])
 
   let content;
   if(isLoading) {
