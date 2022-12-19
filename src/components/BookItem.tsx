@@ -3,6 +3,7 @@ import { IBook } from "../types/type"
 import bookAvatar from '../assets/book_av.jpg'
 import { useAddBookMutation, useUpdateBookMutation, useDeleteBookMutation } from "../service/apiSlice"
 import { Md5 } from "ts-md5"
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 
 const BookItem = (props: IBook) => {
   const { author, cover, id, isbn, pages, published, title} = props
@@ -16,10 +17,6 @@ const BookItem = (props: IBook) => {
   const [deleteBook] = useDeleteBookMutation()
   const [editBook] = useUpdateBookMutation()
 
-  const testSign = () => {
-    console.log(Md5.hashStr(`POSThttps://no23.lavina.tech/books{ "isbn": "9782842671402"}mustang`));
-  }
-
   return (
     <Card sx={{ maxWidth: 345, padding: '5px' }}>
       <CardMedia
@@ -29,6 +26,7 @@ const BookItem = (props: IBook) => {
         alt={title}
       />
       <CardContent>
+        <div className="published"><CalendarTodayIcon />{published} y</div>
         <Typography gutterBottom variant="h5" component="div">
           {author}
         </Typography>
@@ -36,7 +34,6 @@ const BookItem = (props: IBook) => {
           {title}
         </Typography>
       </CardContent>
-      
 
       {window.location.pathname === '/' ? 
         <Button
@@ -45,7 +42,6 @@ const BookItem = (props: IBook) => {
           onClick={() => addBook({Key, Sign: 'f6d41a1a0b2f2ea30cbe0229309b9887', book: body})}
         >{isLoading ? "Loading" : "Add"}</Button> 
         : (
-        <>
         <Grid container spacing={2}>
           <Grid item md={6}>
             <Button
@@ -61,10 +57,7 @@ const BookItem = (props: IBook) => {
             >Delete</Button>
           </Grid>
         </Grid>
-          
-        </>
       )}
-      {/*  */}
     </Card>
   )
 }
