@@ -10,24 +10,13 @@ const BookItem = (props: IBook) => {
   const { author, cover, id, isbn, pages, published, title} = props
   let Key = localStorage.getItem('S_key')
   let Sign = Md5.hashStr(`DELETEhttps://no23.lavina.tech/books/:${isbn}mustang`)
-  let body = {
+  let body = JSON.stringify({
     "isbn": `${isbn}`
-  }
-  let SignBody = Md5.hashStr(`POSThttps://no23.lavina.tech/books{
-    "isbn": "${isbn}"
- }${Key}`)
+  })
+  let SignBody = Md5.hashStr(`POSThttps://no23.lavina.tech/books${body}${Key}`)
   const [addBook, { isLoading, isError, isSuccess }] = useAddBookMutation()
   const [deleteBook] = useDeleteBookMutation()
   const [editBook] = useUpdateBookMutation()
-
-  const handleTestBook = () => {
-    axios.post(`books`, body, {
-      headers: {
-        Key,
-        Sign: SignBody
-      }
-    })    
-  }
 
   return (
     <Card sx={{ maxWidth: 345, padding: '5px' }}>
@@ -51,8 +40,8 @@ const BookItem = (props: IBook) => {
         <Button
           fullWidth
           variant="contained"
-          onClick={handleTestBook}
-        >{isLoading ? "Loading" : "Add"}</Button> 
+          onClick={() => addBook({Key, Sign: SignBody, book: body})}
+        >{isLoading ? "Loading..." : "Add"}</Button> 
         : (
         <Grid container spacing={2}>
           <Grid item md={6}>
