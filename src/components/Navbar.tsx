@@ -25,12 +25,16 @@ const Navbar = () => {
             >
               <CollectionsBookmarkIcon />
             </IconButton>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            <Typography 
+              variant="h6" 
+              component="div" 
+              sx={{ flexGrow: 1, cursor: 'pointer' }}
+              onClick={() => navigate('/')}
+            >
               Bookshelf app
             </Typography>
             
           <Button color="inherit" onClick={() => navigate('/books')}>Books</Button>
-          <Button color="inherit" onClick={() => navigate('/sign-in')}>LogIn</Button>
           <Button color="inherit" onClick={() => navigate('/sign-up')}>Sign-Up</Button>
         </Toolbar>
       </AppBar>

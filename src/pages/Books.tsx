@@ -3,7 +3,6 @@ import { Box, Container } from '@mui/system'
 import { useEffect } from 'react'
 import {Md5} from 'ts-md5'
 import BookItem from '../components/BookItem'
-import BookList from '../components/BookList'
 import { useGetBooksQuery } from '../service/apiSlice'
 import { ISelectBooks } from '../types/type'
 
@@ -17,7 +16,7 @@ const styleCnt = {
 }
 
 const Books = () => {
-    let Key = 'mustang'
+    let Key = localStorage.getItem('S_key')
     let Sign = Md5.hashStr(`GEThttps://no23.lavina.tech/books${Key}`)
 
     const {
@@ -38,7 +37,7 @@ const Books = () => {
       <Box sx={style}>
         <Grid container spacing={2}>
           {books?.data.map((item: ISelectBooks) => (
-            <Grid item xs={3} key={item.book.id}>
+            <Grid item xs={6} md={3} sm={4} key={item.book.id}>
                 <BookItem 
                   author={item.book.author} 
                   cover={item.book.cover}

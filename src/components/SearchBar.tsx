@@ -1,14 +1,14 @@
 import { Button, Grid, TextField } from '@mui/material';
 import { Box } from '@mui/system';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Md5 } from 'ts-md5';
 import { useSearchByTitleMutation } from '../service/apiSlice';
 
 const SearchBar = () => {
-    const [value, setValue] = useState('')
+    const [value, setValue] = useState<string>('')
     let Key = localStorage.getItem('S_key')
     let Sign = Md5.hashStr(`GEThttps://no23.lavina.tech/books/:${value}${Key}`)
-    const [getSearch, result] = useSearchByTitleMutation({
+    const [getSearch, { isLoading }] = useSearchByTitleMutation({
       fixedCacheKey: 'shared-update-post',
     })
 
@@ -38,8 +38,8 @@ const SearchBar = () => {
                 variant='contained'
                 fullWidth
                 sx={{height: '100%'}}
-
-              >Search</Button>
+                disabled={isLoading}
+              >{isLoading ? 'Loading...': 'Search'}</Button>
             </Grid>
           </Grid>
         </Box>
